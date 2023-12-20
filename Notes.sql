@@ -26,6 +26,7 @@ describe agenda;
 
 show tables;
 
+
 insert into agenda(nombre,domicilio,telefono) values
 ('Albert Mores','Colon 123','42424242');
 insert into agenda(nombre,domicilio,telefono) values
