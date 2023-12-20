@@ -53,3 +53,33 @@ INSERT INTO LIBROS(titulo,autor,editorial,precio,cantidad)
 VALUES('Java','James Gosling','Bruño','1000.50','50');
 
 select * from LIBROS;
+
+//EJEMPLO 2
+
+DROP TABLE IF EXISTS EMPLEADOS;
+
+create table empleados(
+nombre varchar(20),
+documento varchar(8),
+sexo varchar(1),
+domicilio varchar(30),
+sueldobasico float
+);
+
+describe empleados;
+
+INSERT INTO empleados(nombre,documento,sexo,domicilio,sueldobasico)
+VALUES('Jhon Fonda','11111111','M','Enrique Palacios 1050','50000');
+INSERT INTO empleados(nombre,documento,sexo,domicilio,sueldobasico)
+VALUES('Jhon Fonda1','22222222','M','Enrique Palacios 1050','50000');
+INSERT INTO empleados(nombre,documento,sexo,domicilio,sueldobasico)
+VALUES('Jhon Fonda2','33333333','M','Enrique Palacios 1050','50000');
+INSERT INTO empleados(nombre,documento,sexo,domicilio,sueldobasico)
+VALUES('Jhon Fonda3','44444444','M','Enrique Palacios 1050','50000');
+INSERT INTO empleados(nombre,documento,sexo,domicilio,sueldobasico)
+VALUES('Jhon Fonda4','55555555','M','Enrique Palacios 1050','50000');
+INSERT INTO empleados(nombre,documento,sexo,domicilio,sueldobasico)
+VALUES('Jhon Fonda5','66666666','M','Enrique Palacios 1050','50000');
+
+select * from empleados;
+
