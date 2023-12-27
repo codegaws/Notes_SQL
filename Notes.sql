@@ -203,3 +203,4 @@ select titulo,autor,editorial,precio from libros where precio<=30;*/
 /*EJERCICIO*/
 27-12-2023
 
+ddd
