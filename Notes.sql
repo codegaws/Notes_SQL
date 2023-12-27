@@ -200,5 +200,5 @@ También, los libros cuyo precio sea menor o igual a 30:
 
 select titulo,autor,editorial,precio from libros where precio<=30;*/
 
-/*EJERCICIO FUENTE EN EL TRABAJO*/
+/*EJERCICIO FUENTE EN EL TRABAJO*******************************/
 
