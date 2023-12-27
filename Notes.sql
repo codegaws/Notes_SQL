@@ -312,3 +312,4 @@ select nombre,clave from usuarios;
 set SQL_SAFE_UPDATES=1;
 
 select @@sql_safe_updates;
+
