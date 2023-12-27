@@ -202,3 +202,86 @@ select titulo,autor,editorial,precio from libros where precio<=30;*/
 
 /*EJERCICIO FUENTE EN EL TRABAJO*******************************/
 
+drop table if exists libros;
+
+create table libros(
+  titulo varchar(20),
+  autor varchar(30),
+  editorial varchar(15),
+  precio float
+);
+
+insert into libros (titulo,autor,editorial,precio) values ('El aleph','Borges','Planeta',12.50);
+insert into libros (titulo,autor,editorial,precio) values ('Martin Fierro','Jose Hernandez','Emece',16.00);
+insert into libros (titulo,autor,editorial,precio) values ('Aprenda PHP','Mario Molina','Emece',35.40);
+insert into libros (titulo,autor,editorial,precio) values ('Cervantes','Borges','Paidos',50.90);
+
+select titulo,autor,precio from libros;
+select titulo,autor,editorial,precio from libros where titulo ='Cervantes';
+select titulo,autor,editorial,precio from libros where autor <> 'Borges';
+select titulo,autor,editorial,precio from libros where precio >20;
+select titulo,autor,editorial,precio from libros where precio <=40;
+
+/*EJEMPLO 2 PELICULAS*/
+drop table if exists peliculas;
+
+create table peliculas(
+	titulo varchar(20),
+	actor varchar(20),
+	duracion integer,
+	cantidad integer
+);
+
+
+
+insert into peliculas (titulo,actor,duracion,cantidad) 
+values ('Mision imposible','Tom cruise',120,3);
+insert into peliculas (titulo,actor,duracion,cantidad) 
+values ('La Bella y la Bestia','Josefina Towson',180,2);
+insert into peliculas (titulo,actor,duracion,cantidad) 
+values ('Titanic','Leonardo Di Caprio',90,3);
+insert into peliculas (titulo,actor,duracion,cantidad) 
+values ('Pasion y Prejuicio','Jhon Hakwman',90,2);
+
+select * from peliculas;
+select titulo,actor,duracion,cantidad from peliculas where duracion <= 90;
+select titulo,actor,duracion,cantidad from peliculas where actor <> 'Tom cruise';
+select titulo,actor,duracion,cantidad from peliculas where cantidad > 2
+
+/*****    9.-Borrado de registros de una tabla (delete)**/
+/*ara eliminar los registros de una tabla usamos el comando "delete":
+
+delete from usuarios;
+La ejecución del comando indicado en la línea anterior borra TODOS los registros de la tabla.
+
+Si queremos eliminar uno o varios registros debemos indicar cuál o cuáles, para ello utilizamos el comando "delete" 
+junto con la clausula "where" con la cual establecemos la condición que deben cumplir los registros a borrar. 
+Por ejemplo, queremos eliminar aquel registro cuyo nombre de usuario es 'Leonardo':
+
+delete from usuarios where nombre='Leonardo';
+Si solicitamos el borrado de un registro que no existe, es decir, ningún registro cumple con la
+ condición especificada, no se borrarán registros, pues no encontró registros con ese dato.
+
+El comando delete hay que tener mucho cuidado en su uso, una vez eliminado un registro no hay forma de recuperarlo. 
+Si por ejemplo ejecutamos el comando:
+
+delete from usuarios;
+Si la tabla tiene 1000000 de filas, todas ellas serán eliminadas.
+
+En MySQL hay una variable de configuración llamada SQL_SAFE_UPDATES que puede almacenar los valores 1 (activa) y 0 (desactiva). 
+Cuando tiene el valor 1 no permite ejecutar comandos delete sin indicar un where y que dicho where se relacione 
+a una clave primaria, tema que veremos más adelante.*/
+
+drop table if exists  usuarios;
+
+create table usuarios (
+  nombre varchar(30),
+  clave varchar(10)
+);
+
+insert into usuarios (nombre, clave) values ('Leonardo','payaso');
+insert into usuarios (nombre, clave) values ('MarioPerez','Marito');
+insert into usuarios (nombre, clave) values ('Marcelo','River');
+insert into usuarios (nombre, clave) values ('Gustavo','River');
+
+/*delete*/
