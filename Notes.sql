@@ -285,4 +285,4 @@ insert into usuarios (nombre, clave) values ('Marcelo','River');
 insert into usuarios (nombre, clave) values ('Gustavo','River');
 
 /*delete*/
-PRUEBA
+PRUEBA 2
