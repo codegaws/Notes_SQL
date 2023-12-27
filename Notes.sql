@@ -201,6 +201,5 @@ También, los libros cuyo precio sea menor o igual a 30:
 select titulo,autor,editorial,precio from libros where precio<=30;*/
 
 /*EJERCICIO*/
-george  mars ss
+27-12-2023
 
-git
