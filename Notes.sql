@@ -314,3 +314,4 @@ set SQL_SAFE_UPDATES=1;
 select @@sql_safe_updates;
 
 /*CAPITULO 10 SQL*/
+AUN NO SE REALIZO NADA
