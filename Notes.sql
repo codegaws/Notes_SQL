@@ -530,4 +530,106 @@ insert into medicamentos (nombre, laboratorio,precio,cantidad)
   values('Bayaspirina','Bayer',2.10,150); 
   select * from medicamentos;
   
+  /*********************************************************TRUNCABLE TABLE***********************************************/
   
+
+/*Aprendimos que para borrar todos los registro de una tabla se usa "delete" sin condición "where".
+
+También podemos eliminar todos los registros de una tabla con "truncate table". Por ejemplo, queremos vaciar la tabla "libros", 
+usamos:
+
+ truncate table libros;
+La sentencia "truncate table" vacía la tabla (elimina todos los registros) y vuelve a crear la tabla con la misma estructura.
+
+La diferencia con "drop table" es que esta sentencia borra la tabla, "truncate table" la vacía.
+
+La diferencia con "delete" es la velocidad, es más rápido "truncate table" que "delete" 
+(se nota cuando la cantidad de registros es muy grande) ya que éste borra los registros uno a uno.
+
+Otra diferencia es la siguiente: cuando la tabla tiene un campo "auto_increment", 
+si borramos todos los registros con "delete" y luego ingresamos un registro, al cargarse 
+el valor en el campo autoincrementable, continúa con la secuencia teniendo en cuenta el 
+valor mayor que se había guardado; si usamos "truncate table" para borrar todos los registros, 
+al ingresar otra vez un registro, la secuencia del campo autoincrementable vuelve a iniciarse en 1.
+
+Por ejemplo, tenemos la tabla "libros" con el campo "codigo" definido "auto_increment",
+ y el valor más alto de ese campo es "5", si borramos todos los registros con "delete" y 
+ luego ingresamos un registro sin valor de código, se guardará el valor "6"; si en cambio,
+  vaciamos la tabla con "truncate table", al ingresar un nuevo registro sin valor para el código, 
+  iniciará la secuencia en 1 nuevamente.*/
+
+
+  drop table if exists libros;
+
+create table libros(
+  codigo integer auto_increment,
+  titulo varchar(50),
+  autor varchar(50),
+  editorial varchar(25),
+  primary key (codigo)
+ );
+
+describe libros;
+
+insert into libros (titulo,autor,editorial)
+  values('Martin Fierro','Jose Hernandez','Planeta');
+insert into libros (titulo,autor,editorial)
+  values('Aprenda PHP','Mario Molina','Emece');
+insert into libros (titulo,autor,editorial)
+  values('Cervantes y el quijote','Borges','Paidos');
+insert into libros (titulo,autor,editorial)
+  values('Matematica estas ahi', 'Paenza', 'Paidos');
+insert into libros (titulo,autor,editorial)
+  values('El aleph', 'Borges', 'Emece');
+
+delete from libros;
+
+select * from libros;
+
+insert into libros (titulo,autor,editorial)
+  values('Antología poetica', 'Borges', 'Emece');
+
+select * from libros;
+
+truncate table libros;
+
+insert into libros (titulo,autor,editorial)
+  values('Antología poetica', 'Borges', 'Emece');
+
+select * from libros;
+
+/*EJEMPLO TRUNCATE TABLE*/
+drop table if exists  medicamentos;
+
+
+create table medicamentos(
+  codigo integer auto_increment,
+  nombre varchar(20),
+  laboratorio varchar(20),
+  precio float,
+  cantidad integer,
+  primary key (codigo)
+ );
+ 
+insert into medicamentos (nombre, laboratorio,precio,cantidad)
+   values('Sertal','Roche',5.2,100);
+insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values('Buscapina','Roche',4.10,200);
+insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values('Amoxidal 500','Bayer',15.60,100);
+  
+  delete from medicamentos;
+  
+insert into medicamentos (nombre, laboratorio,precio,cantidad)
+   values('Sertal','Roche',5.2,100);
+insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values('Amoxidal 500','Bayer',15.60,100);
+  
+  select * from medicamentos;
+  
+  truncate table medicamentos;
+  insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values('Buscapina','Roche',4.10,200);
+  
+    
+  select * from medicamentos;
