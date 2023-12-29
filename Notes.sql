@@ -313,3 +313,31 @@ set SQL_SAFE_UPDATES=1;
 
 select @@sql_safe_updates;
 
+/*****    10.-Modificación de registros de una tabla (update)
+Para modificar uno o varios datos de uno o varios registros utilizamos "update" (actualizar).
+
+Por ejemplo, en nuestra tabla "usuarios", queremos cambiar los valores de todas las claves, por "RealMadrid":
+
+ update usuarios set clave='RealMadrid';
+Utilizamos "update" junto al nombre de la tabla y "set" junto con el campo a modificar y su nuevo valor.
+
+El cambio afectará a todos los registros.
+
+Podemos modificar algunos registros, para ello debemos establecer condiciones de selección con "where".
+
+Por ejemplo, queremos cambiar el valor correspondiente a la clave de nuestro usuario llamado 'MarioPerez', 
+queremos como nueva clave 'Boca', necesitamos una condición "where" que afecte solamente a este registro:
+
+ update usuarios set clave='Boca'
+  where nombre='MarioPerez';
+Si no encuentra registros que cumplan con la condición del "where", ningún registro es afectado.
+
+Las condiciones no son obligatorias, pero si omitimos la cláusula "where", la actualización afectará a todos los registros.
+
+También se puede actualizar varios campos en una sola instrucción:
+
+ update usuarios set nombre='MarceloDuarte', clave='Marce'
+  where nombre='Marcelo';
+Para ello colocamos "update", el nombre de la tabla, "set" junto al nombre del campo y 
+el nuevo valor y separado por coma, el otro nombre del campo con su nuevo valor. */
+
