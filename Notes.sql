@@ -633,3 +633,194 @@ insert into medicamentos (nombre, laboratorio,precio,cantidad)
   
     
   select * from medicamentos;
+
+  /*TEMA 14 - Valores null*/
+
+  /*
+  Analizaremos la estructura de una tabla que vemos al utilizar el comando "describe". Tomamos como ejemplo la tabla "libros":
+
+La primera columna indica el tipo de dato de cada campo.
+
+La segunda columna "Null" especifica si el campo permite valores nulos; vemos que en el campo "codigo", aparece "NO" 
+y en las demás "YES", esto significa que el primer campo no acepta valores nulos (porque es clave primaria) y 
+los otros si los permiten.
+
+La tercera columna "Key", muestra los campos que son clave primaria; en el campo "codigo" aparece "PRI" 
+(es clave primaria) y los otros están vacíos, porque no son clave primaria.
+
+La cuarta columna "Default", muestra los valores por defecto, esto es, los valores que MySQL ingresa 
+cuando omitimos un dato o colocamos un valor inválido; para todos los campos, excepto para el que es clave primaria,
+ el valor por defecto es "null".
+
+La quinta columna "Extra", muestra algunos atributos extra de los campos; el campo "codigo" es "auto_increment".
+
+Vamos a explicar los valores nulos.
+
+"null' significa "dato desconocido" o "valor inexistente". No es lo mismo que un valor 0, una cadena 
+vacía o una cadena literal "null".
+
+A veces, puede desconocerse o no existir el dato correspondiente a algún campo de un registro. 
+En estos casos decimos que el campo puede contener valores nulos. Por ejemplo, en nuestra tabla de libros, 
+podemos tener valores nulos en el campo "precio" porque es posible que para algunos libros no le hayamos
+ establecido el precio para la venta.
+
+En contraposición, tenemos campos que no pueden estar vacíos jamás, por ejemplo, los campos que 
+identifican cada registro, como los códigos de identificación, que son clave primaria.
+
+Por defecto, es decir, si no lo aclaramos en la creación de la tabla, los campos permiten valores nulos.
+
+Imaginemos que ingresamos los datos de un libro, para el cual aún no hemos definido el precio:
+
+insert into libros (titulo,autor,editorial,precio) 
+  values ('El aleph','Borges','Planeta',null);
+Note que el valor "null" no es una cadena de caracteres, no se coloca entre comillas.
+
+Si un campo acepta valores nulos, podemos ingresar "null" cuando no conocemos el valor.
+
+Los campos establecidos como clave primaria no aceptan valores nulos. Nuestro campo clave 
+primaria, está definido "auto_increment"; si intentamos ingresar el valor "null" para este campo, 
+no lo tomará y seguirá la secuencia de incremento.
+
+El campo "titulo", no debería aceptar valores nulos, para establecer este atributo debemos crear
+ la tabla con la siguiente sentencia:
+
+ create table libros(
+  codigo int auto_increment,
+  titulo varchar(50) not null
+  autor varchar(50),
+  editorial varchar(25),
+  precio float,
+  primary key (codigo)
+ );
+Entonces, para que un campo no permita valores nulos debemos especificarlo luego de definir el campo, 
+agregando "not null". Por defecto, los campos permiten valores nulos, pero podemos especificarlo igualmente agregando "null".
+
+Explicamos que "null" no es lo mismo que una cadena vacía o un valor 0 (cero).
+
+Para recuperar los registros que contengan el valor "null" en el campo "precio" no podemos utilizar 
+los operadores relacionales vistos anteriormente: = (igual) y <> (distinto); debemos utilizar los operadores 
+"is null" (es igual a null) y "is not null" (no es null):
+
+ select * from libros
+  where precio is null;
+La sentencia anterior tendrá una salida diferente a la siguiente:
+
+ select * from libros
+  where precio=0;
+Con la primera sentencia veremos los libros cuyo precio es igual a "null" (desconocido); con la segunda, los libros cuyo precio es 0.
+
+Igualmente para campos de tipo cadena, las siguientes sentencias "select" no retornan los mismos registros:
+
+select * from libros where editorial is null;
+select * from libros where editorial='';
+Con la primera sentencia veremos los libros cuya editorial es igual a "null", con la segunda, los libros 
+cuya editorial guarda una cadena vacía.*/
+
+create table libros(
+  codigo integer auto_increment,
+  titulo varchar(60) not null,
+  autor varchar(30),
+  editorial varchar(15),
+  precio float,
+  primary key(codigo)
+ );
+
+insert into libros (titulo,autor,editorial,precio)
+  values('El aleph','Borges','Planeta',null);
+
+insert into libros (titulo,autor,editorial,precio)
+  values ('Matematica estas ahi','Paenza','Paidos',0);
+
+insert into libros (titulo,autor,editorial,precio)
+  values ('Martin Fierro','Jose Hernandez','',22.50);
+
+insert into libros (titulo,autor,editorial,precio)
+  values ('Harry Potter y la piedra filosofal', 'J.K. Rowling',null,30.00);
+
+select * from libros
+  where precio is null;
+
+select * from libros
+  where precio=0;
+
+select * from libros
+  where editorial is null;
+
+select *from libros
+  where editorial='';
+
+  /*EJERCICIO */
+  drop table if exists  medicamentos;
+
+
+create table medicamentos(
+  codigo integer auto_increment,
+  nombre varchar(30) not null,
+  laboratorio varchar(20),
+  precio float,
+  cantidad integer not null,
+  primary key (codigo)
+ );
+ 
+ describe medicamentos;
+ 
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Sertal gotas','Roche',5.2,100); 
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Sertal compuesto','Roche',7.1,150);
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Buscapina','Roche',null,200);
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Amoxidal 500','Bayer',15.60,0);
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Amoxidal jarabe','Bayer',25,120);
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Amoxinil',null,25,120);
+ insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values('Bayaspirina','',0,150); 
+  
+select * from medicamentos;
+
+
+/*Recupera valor null en el campo laboratorio*/  
+select * from medicamentos where laboratorio is null;
+/*Recupera valor '' en el campo laboratorio*/  
+select * from medicamentos where laboratorio = '';
+/*campo precio*/
+select * from medicamentos where precio is null;
+select * from medicamentos where precio=0;
+/*ver error en campo nombre*/
+insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values(null,'Bayer',10.20,100); 
+  
+/*Ingrese el siguiente registro con valor "null" para el campo correspondiente al código:
+ insert into medicamentos (codigo,nombre, laboratorio,precio,cantidad)
+  values(null,'Benadryl comprimidos','Bayer',10.20,null);
+No muestra un mensaje de error. Si recuperamos todos los registros, verá que almacenó 
+el siguiente valor de la secuencia de autoincremento.*/
+ insert into medicamentos (codigo,nombre, laboratorio,precio,cantidad)
+  values(null,'Benadryl comprimidos','Bayer',10.20,null);
+
+/*Recupere los registros cuyo precio sea distinto de 0, luego los que 
+    sean distintos de "null":
+ select * from medicamentos where precio<>0;
+ select * from medicamentos where precio is not null;
+Note que la salida de la primera sentencia no muestra los registros con valor 0 y tampoco 
+los que tienen valor nulo; el resultado de la segunda sentencia muestra los registros con 
+valor para el campo precio (incluso el valor 0). Esto es porque los valores "null" no 
+pueden compararse con operadores relacionales.*/
+
+select * from medicamentos where precio<>0;
+select * from medicamentos where precio is not null;
+
+/*Recupere los registros en los cuales el laboratorio no contenga una cadena vacía, 
+    luego los que sean distintos de "null":
+ select * from medicamentos where laboratorio<>'';
+ select * from medicamentos where laboratorio is not null;
+Note que la primera sentencia solicita los registros que no tengan cadena vacía, es decir, 
+los que guardan una cadena, como "null" no es una cadena, no retorna los registros con valor nulo. 
+El resultado de la segunda sentencia solicita que no muestre los valores nulos, es decir, 
+que muestre cualquier cadena, incluso vacía.*/
+
+select * from medicamentos where laboratorio<>'';
+ select * from medicamentos where laboratorio is not null;
