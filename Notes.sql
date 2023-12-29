@@ -341,4 +341,23 @@ También se puede actualizar varios campos en una sola instrucción:
 Para ello colocamos "update", el nombre de la tabla, "set" junto al nombre del campo y 
 el nuevo valor y separado por coma, el otro nombre del campo con su nuevo valor. */
 
-sssss
+drop table if exists  usuarios;
+
+create table usuarios (
+  nombre varchar(30),
+  clave varchar(10)
+);
+
+insert into usuarios (nombre, clave) values ('Leonardo','payaso');
+insert into usuarios (nombre, clave) values ('MarioPerez','Marito'); 
+insert into usuarios (nombre, clave) values ('Marcelo','River');
+insert into usuarios (nombre, clave) values ('Gustavo','River');
+
+select * from usuarios;
+
+/*todas claves tienen la misma contraseña*/
+update usuarios set clave='RealMadrid';
+/*cambiar solo el nombre 'GustavoGarcia'*/
+update usuarios set nombre='GustavoGarcia' where nombre = 'Leonardo';
+/*cambiar solo el nombre , clave */
+update usuarios set nombre='MarceloDuarte', clave='Marce' where nombre ='Marcelo' ;
