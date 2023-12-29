@@ -342,3 +342,51 @@ También se puede actualizar varios campos en una sola instrucción:
 Para ello colocamos "update", el nombre de la tabla, "set" junto al nombre del campo y 
 el nuevo valor y separado por coma, el otro nombre del campo con su nuevo valor. */
 
+drop table if exists  usuarios;
+
+create table usuarios (
+  nombre varchar(30),
+  clave varchar(10)
+);
+
+insert into usuarios (nombre, clave) values ('Leonardo','payaso');
+insert into usuarios (nombre, clave) values ('MarioPerez','Marito'); 
+insert into usuarios (nombre, clave) values ('Marcelo','River');
+insert into usuarios (nombre, clave) values ('Gustavo','River');
+
+select * from usuarios;
+
+/*todas claves tienen la misma contraseña*/
+update usuarios set clave='RealMadrid';
+/*cambiar solo el nombre 'GustavoGarcia'*/
+update usuarios set nombre='GustavoGarcia' where nombre = 'Leonardo';
+/*cambiar solo el nombre , clave */
+update usuarios set nombre='MarceloDuarte', clave='Marce' where nombre ='Marcelo' ;
+
+/*EJEMPLO CON ARTICULOS UPDATE*/
+
+drop table if exists articulos;
+
+create table articulos(
+	codigo integer,
+    nombre varchar(20),
+    descripcion varchar(30),
+    precio float,
+    cantidad integer
+
+
+);
+
+describe articulos;
+
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('1','impresora','Epson Stylus C45','400',20);
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('2','impresora','Epson Stylus C35','500',30);
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('3','monitor','LG','800',10);
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('4','teclado','español bisuwl','100',50);
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('5','teclado','ingles Disual','90',50);
+
+select * from articulos;
+/*cambiamos el precio segun la descripcion*/
+update articulos set precio=400 where descripcion ='Epson Stylus C35';
+
+update articulos set cantidad=50,precio=550 where codigo=2;
