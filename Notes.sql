@@ -447,3 +447,87 @@ values('35454545','Lopez','Susana','Urquiza 344','4522525');
 insert into clientes(documento,apellido,nombre,domicilio,telefono)
 values('35454545','Rodriguez','Pablo','Colon 333','2323235');
 select * from clientes;
+
+/******************************************************Campo entero con autoincremento*/
+
+/* Un campo de tipo entero puede tener otro atributo extra 'auto_increment'. Los valores de un campo 'auto_increment', 
+se inician en 1 y se incrementan en 1 automáticamente.
+
+Se utiliza generalmente en campos correspondientes a códigos de identificación para generar valores únicos para cada nuevo 
+registro que se inserta.
+
+Sólo puede haber un campo "auto_increment" y debe ser clave primaria (o estar indexado).
+
+Para establecer que un campo autoincremente sus valores automáticamente, éste debe ser entero (integer) y debe ser clave primaria:
+
+ create table libros(
+  codigo int auto_increment,
+  titulo varchar(50),
+  autor varchar(50),
+  editorial varchar(25),
+  primary key (codigo)
+ );
+Para definir un campo autoincrementable colocamos "auto_increment" luego de la definición del campo al crear la tabla.
+
+Hasta ahora, al ingresar registros, colocamos el nombre de todos los campos antes de los valores; 
+es posible ingresar valores para algunos de los campos de la tabla, pero recuerde que al ingresar los valores debemos tener
+ en cuenta los campos que detallamos y el orden en que lo hacemos.
+
+Cuando un campo tiene el atributo "auto_increment" no es necesario ingresar valor para él, 
+porque se inserta automáticamente tomando el último valor como referencia, o 1 si es el primero.
+
+Para ingresar registros omitimos el campo definido como "auto_increment", por ejemplo:
+
+ insert into libros (titulo,autor,editorial)
+  values('El aleph','Borges','Planeta');
+Este primer registro ingresado guardará el valor 1 en el campo correspondiente al código.
+
+Si continuamos ingresando registros, el código (dato que no ingresamos) se cargará automáticamente 
+siguiendo la secuencia de autoincremento.
+
+Un campo "auto_increment" funciona correctamente sólo cuando contiene únicamente valores positivos. 
+Más adelante explicaremos cómo definir un campo con sólo valores positivos.
+
+Está permitido ingresar el valor correspondiente al campo "auto_increment", por ejemplo:
+
+ insert into libros (codigo,titulo,autor,editorial)
+  values(6,'Martin Fierro','Jose Hernandez','Paidos');
+Pero debemos tener cuidado con la inserción de un dato en campos "auto_increment". Debemos tener en cuenta que:
+
+- si el valor está repetido aparecerá un mensaje de error y el registro no se 
+  ingresará.
+- si el valor dado saltea la secuencia, lo toma igualmente y en las siguientes 
+  inserciones, continuará la secuencia tomando el valor más alto.
+- si el valor ingresado es 0, no lo toma y guarda el registro continuando la 
+  secuencia.
+- si el valor ingresado es negativo (y el campo no está definido para aceptar sólo 
+  valores positivos), lo ingresa.
+Para que este atributo funcione correctamente, el campo debe contener solamente valores positivos; 
+más adelante trataremos este tema.*/
+
+/*EJEMPLO*/
+drop table if exists medicamentos;
+create table medicamentos(
+	codigo integer auto_increment,
+    nombre varchar(20),
+    laboratorio varchar(20),
+    precio float,
+    cantidad integer,
+    primary key(codigo)
+);
+
+describe medicamentos;
+
+insert into medicamentos (nombre, laboratorio,precio,cantidad)
+   values('Sertal','Roche',5.2,100);
+ insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values('Buscapina','Roche',4.10,200);
+ insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values('Amoxidal 500','Bayer',15.60,100);
+ insert into medicamentos (codigo,nombre, laboratorio,precio,cantidad)
+  values(12,'Paracetamol 500','Bago',1.90,200);
+  insert into medicamentos (nombre, laboratorio,precio,cantidad)
+  values('Bayaspirina','Bayer',2.10,150); 
+  select * from medicamentos;
+  
+  
