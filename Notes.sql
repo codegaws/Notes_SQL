@@ -390,3 +390,59 @@ select * from articulos;
 update articulos set precio=400 where descripcion ='Epson Stylus C35';
 
 update articulos set cantidad=50,precio=550 where codigo=2;
+
+/* 11.- Clave primaria*/
+
+
+/*Una clave primaria es un campo (o varios) que identifica 1 solo registro (fila) en una tabla.
+
+Para un valor del campo clave existe solamente 1 registro. Los valores no se repiten ni pueden ser nulos.
+
+Veamos un ejemplo, si tenemos una tabla con datos de personas, el número de documento puede establecerse como clave primaria, 
+es un valor que no se repite; puede haber personas con igual apellido y nombre, incluso el mismo domicilio (padre e hijo por ejemplo), 
+pero su documento será siempre distinto.
+
+Si tenemos la tabla "usuarios", el nombre de cada usuario puede establecerse como clave primaria, es un valor que no se repite; 
+puede haber usuarios con igual clave, pero su nombre de usuario será siempre distinto.
+
+Establecemos que un campo sea clave primaria al momento de creación de la tabla:
+
+ create table usuarios (
+  nombre varchar(20),
+  clave varchar(10),
+  primary key(nombre)
+ );
+Para definir un campo como clave primaria agregamos "primary key" luego de la definición de todos los campos y 
+entre paréntesis colocamos el nombre del campo que queremos como clave.
+
+Si visualizamos la estructura de la tabla con "describe" vemos que el campo "nombre" es clave primaria y no acepta 
+valores nulos(más adelante explicaremos esto detalladamente).*/
+
+drop table if exists clientes;
+
+create table clientes(
+	documento varchar(8),
+    apellido varchar(20),
+    nombre varchar(20),
+    domicilio varchar(30),
+    telefono varchar (11),
+    primary key (documento)
+);
+
+describe clientes;
+
+insert into clientes(documento,apellido,nombre,domicilio,telefono)
+values('40343146','Chinchayan','George','av.Palacios 1068','922434628');
+
+insert into clientes(documento,apellido,nombre,domicilio,telefono)
+values('40343147','Fonseca','Grimaldo','Avellaneda 1354','4252652');
+
+insert into clientes(documento,apellido,nombre,domicilio,telefono)
+values('20454545','Lopez','Susana','Urquiza 344','4522525');
+
+insert into clientes(documento,apellido,nombre,domicilio,telefono)
+values('35454545','Lopez','Susana','Urquiza 344','4522525');
+
+insert into clientes(documento,apellido,nombre,domicilio,telefono)
+values('35454545','Rodriguez','Pablo','Colon 333','2323235');
+select * from clientes;
