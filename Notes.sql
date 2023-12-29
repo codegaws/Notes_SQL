@@ -313,7 +313,6 @@ set SQL_SAFE_UPDATES=1;
 
 select @@sql_safe_updates;
 
-
 /*****    10.-Modificación de registros de una tabla (update)
 Para modificar uno o varios datos de uno o varios registros utilizamos "update" (actualizar).
 
@@ -391,6 +390,7 @@ update articulos set precio=400 where descripcion ='Epson Stylus C35';
 
 update articulos set cantidad=50,precio=550 where codigo=2;
 
+
 /* 11.- Clave primaria*/
 
 
@@ -412,7 +412,8 @@ Establecemos que un campo sea clave primaria al momento de creación de la tabla
   clave varchar(10),
   primary key(nombre)
  );
-Para definir un campo como clave primaria agregamos "primary key" luego de la definición de todos los campos y 
+
+ Para definir un campo como clave primaria agregamos "primary key" luego de la definición de todos los campos y 
 entre paréntesis colocamos el nombre del campo que queremos como clave.
 
 Si visualizamos la estructura de la tabla con "describe" vemos que el campo "nombre" es clave primaria y no acepta 
