@@ -361,3 +361,31 @@ update usuarios set clave='RealMadrid';
 update usuarios set nombre='GustavoGarcia' where nombre = 'Leonardo';
 /*cambiar solo el nombre , clave */
 update usuarios set nombre='MarceloDuarte', clave='Marce' where nombre ='Marcelo' ;
+
+/*EJEMPLO CON ARTICULOS UPDATE*/
+
+drop table if exists articulos;
+
+create table articulos(
+	codigo integer,
+    nombre varchar(20),
+    descripcion varchar(30),
+    precio float,
+    cantidad integer
+
+
+);
+
+describe articulos;
+
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('1','impresora','Epson Stylus C45','400',20);
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('2','impresora','Epson Stylus C35','500',30);
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('3','monitor','LG','800',10);
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('4','teclado','español bisuwl','100',50);
+insert into articulos (codigo,nombre,descripcion,precio,cantidad) values('5','teclado','ingles Disual','90',50);
+
+select * from articulos;
+/*cambiamos el precio segun la descripcion*/
+update articulos set precio=400 where descripcion ='Epson Stylus C35';
+
+update articulos set cantidad=50,precio=550 where codigo=2;
