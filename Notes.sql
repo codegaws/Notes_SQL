@@ -341,3 +341,4 @@ También se puede actualizar varios campos en una sola instrucción:
 Para ello colocamos "update", el nombre de la tabla, "set" junto al nombre del campo y 
 el nuevo valor y separado por coma, el otro nombre del campo con su nuevo valor. */
 
+sssss
