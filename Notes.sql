@@ -824,3 +824,58 @@ que muestre cualquier cadena, incluso vacía.*/
 
 select * from medicamentos where laboratorio<>'';
  select * from medicamentos where laboratorio is not null;
+
+/*************************************TEMA 15 - Valores numéricos sin signo (unsigned)*******************/
+/*SE ASIGNA PARA NO PERMITIR INGRESAR DATOS NEGATIVOS*/
+
+/*************************************TEMA 16 - Tipos de datos (texto)**********************************/
+
+/*Los valores que podemos guardar son:
+
+A) TEXTO: Para almacenar texto usamos cadenas de caracteres. Las cadenas se colocan entre comillas simples.
+ Podemos almacenar dígitos con los que no se realizan operaciones matemáticas, por ejemplo, códigos de identificación,
+  números de documentos, números telefónicos. Tenemos los siguientes tipos: varchar, char y text.
+
+B) NUMEROS: Existe variedad de tipos numéricos para representar enteros, negativos, decimales.
+ Para almacenar valores enteros, por ejemplo, en campos que hacen referencia a cantidades, precios, etc., usamos el tipo integer. 
+ Para almacenar valores con decimales utilizamos: float o decimal.
+
+C) FECHAS Y HORAS: para guardar fechas y horas dispone de varios tipos: date (fecha), datetime (fecha y hora), 
+time (hora), year (año) y timestamp.
+
+D) OTROS TIPOS: enum y set representan una enumeración y un conjunto respectivamente. Lo veremos más adelante.
+
+E) Otro valor que podemos almacenar es el valor "null". El valor 'null' significa “valor desconocido” o "dato inexistente", 
+ya lo estudiamos. No es lo mismo que 0 o una cadena vacía.*/
+
+
+drop table if exists autos;
+
+create table autos(
+	patente char(6),
+	marca varchar(20),
+    modelo char(4),
+    precio float,
+    primary key(patente)
+
+);
+
+describe autos;
+insert into autos (patente,marca,modelo,precio)
+  values('ACD123','Fiat 128','1970',15000);
+ insert into autos (patente,marca,modelo,precio)
+  values('ACG234','Renault 11','1990',40000);
+ insert into autos (patente,marca,modelo,precio)
+  values('BCD333','Peugeot 505','1990',80000);
+ insert into autos (patente,marca,modelo,precio)
+  values('GCD123','Renault Clio','1990',70000);
+ insert into autos (patente,marca,modelo,precio)
+  values('BCC333','Renault Megane','1998',95000);
+ insert into autos (patente,marca,modelo,precio)
+  values('BVF543','Fiat 128','1975',20000);
+
+select * from autos
+where modelo='1990';
+
+select * from autos
+where precio > 50000;
