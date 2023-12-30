@@ -879,3 +879,49 @@ where modelo='1990';
 
 select * from autos
 where precio > 50000;
+
+/************************************************TEMA 18 Tipos de datos (numéricos)********************************************/
+/*Para almacenar valores enteros, por ejemplo, en campos que hacen referencia a cantidades, precios, etc., usamos: 1) integer(x) 
+o int(x): su rango es de -2000000000 a 2000000000 aprox. El tipo "int unsigned" va de 0 a 4000000000. 
+El tipo "integer" tiene subtipos:
+
+- mediumint(x): va de –8000000 a 8000000 aprox. Sin signo va de 0 a 16000000 aprox.
+
+- smallint(x): va de –30000 a 30000 aprox., sin signo, de 0 a 60000 aprox.
+
+- tinyint(x): define un valor entero pequeño, cuyo rango es de -128 a 127. El tipo sin signo va de 0 a 255.
+
+- bool o boolean: sinónimos de tinyint(1). Un valor cero se considera falso, los valores distintos de cero, verdadero.
+
+- bigint(x): es un entero largo. Va de –9000000000000000000 a 9000000000000000000 aprox. Sin signo es de 0 a 10000000000000000000.
+
+Para almacenar valores con decimales utilizamos:
+
+2) float (t,d): número de coma flotante. Su rango es de -3.4e+38 a –1.1e-38 (9 cifras).
+
+3) decimal o numeric (t,d): el primer argumento indica el total de dígitos y el segundo, la cantidad de decimales. 
+El rango depende de los argumentos, también los bytes que ocupa. Si queremos almacenar valores entre 0.00 y 
+99.99 debemos definir el campo como tipo "decimal (4,2)". Si no se indica el valor del segundo argumento, por defecto es 0. 
+Para los tipos "float" y "decimal" se utiliza el punto como separador de decimales.
+
+Todos los tipos enteros pueden tener el atributo "unsigned", esto permite sólo valores positivos y duplica el rango. 
+Los tipos de coma flotante también aceptan el atributo "unsigned", pero el valor del límite superior del rango no se modifica.
+
+Es importante elegir el tipo de dato adecuado según el caso, el más preciso. Por ejemplo, 
+si un campo numérico almacenará valores positivos menores a 10000, el tipo "int" no es el más adecuado,
+ porque su rango va de -2000000000 a 2000000000 aprox., conviene el tipo "smallint unsigned", cuyo rango va de 0 a 60000 aprox.
+  De esta manera usamos el menor espacio de almacenamiento posible.*/
+
+drop table if exists libros;
+
+create table libros(
+  codigo int unsigned auto_increment,
+  titulo varchar(20) not null,
+  autor varchar(30),
+  editorial varchar(15),
+  precio decimal(5,2) unsigned,
+  cantidad smallint unsigned,
+  primary key (codigo)
+ );
+
+describe libros;
