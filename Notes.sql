@@ -972,3 +972,4 @@ insert into libros (titulo,autor,editorial,precio,cantidad)
   values('El gato con botas',default,'Planeta',default,100);
 
 select * from libros;
+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
