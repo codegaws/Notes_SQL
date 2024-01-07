@@ -974,3 +974,4 @@ insert into libros (titulo,autor,editorial,precio,cantidad)
 
 select * from libros;
 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
+-- TEMA 20 -- 07-01-2024
